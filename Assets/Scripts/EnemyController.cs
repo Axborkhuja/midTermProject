@@ -13,6 +13,7 @@ public class EnemyController : MonoBehaviour
     private GameObject canvas;
     private float nextShootTime;
     private RectTransform rt;
+    public GameController logic;
 
     void Start()
     {
@@ -20,6 +21,7 @@ public class EnemyController : MonoBehaviour
         nextShootTime = Time.time + shootDelay;
         canvas = GameObject.Find("Canvas");
         rt = GetComponent<RectTransform>();
+        logic = GameObject.FindGameObjectWithTag("gameController").GetComponent<GameController>();
     }
     private void FixedUpdate()
     {
@@ -66,8 +68,9 @@ public class EnemyController : MonoBehaviour
         // Destroy the enemy on collision with player's bullet
         if (collision.CompareTag("PlayerBullet"))
         {
+            logic.addScore(1);
             destroy.Play();
-            Destroy(gameObject);
+            Destroy(gameObject);    
         }
     }
 }

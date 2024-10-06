@@ -11,10 +11,13 @@ public class PlayerController : MonoBehaviour
     public float bulletSpeed = 10f; // Speed of the bullet
     public float moveSpeed = 5f; // Movement speed of the player
     private Rigidbody2D rb;
+    public int health = 100;
+    public GameController logic;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        logic = GameObject.FindGameObjectWithTag("gameController").GetComponent<GameController>();
     }
 
     void FixedUpdate()
@@ -61,8 +64,19 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.CompareTag("EnemyBullet")){
+            if (health-150 > 0){
+                health = health - 150;
+                logic.updateHealth(150);
+            }else{
+                destroy.Play();
+                Destroy(gameObject);
+                Time.timeScale = 0;
+            }
+        }
+
         // Destroy the player when hit by something
-        if (collision.CompareTag("EnemyBullet") || collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy"))
         {
             destroy.Play();
             Destroy(gameObject);
