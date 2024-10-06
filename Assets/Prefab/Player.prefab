@@ -5518,14 +5518,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02ebe3b590681724ba4c4358255593c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyAudio: {fileID: 0}
+  onShoot: {fileID: 0}
+  engine: {fileID: 0}
   particle1: {fileID: 3009591165640664440}
   particle2: {fileID: 1875690890650827859}
   destroy: {fileID: 2865380096894182241, guid: 837551731ef91ac47898a3b2da2ef674, type: 3}
   bulletPrefab: {fileID: 4714404243307574825, guid: 1541a3b2baf61f24ba2607c7f467e8f9, type: 3}
   firePoint: {fileID: 598380191458484028}
   canvas: {fileID: 0}
-  bulletSpeed: 50
-  moveSpeed: 5
+  bulletSpeed: 20
+  moveSpeed: 7
+  health: 100
+  logic: {fileID: 0}
 --- !u!1 &8845917888002570486
 GameObject:
   m_ObjectHideFlags: 0

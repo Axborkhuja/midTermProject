@@ -10,22 +10,25 @@ public class EnemyController : MonoBehaviour
     public float shootDelay = 1.5f; // Delay between shots
     public float bulletSpeed = 5f; // Speed of the bullet
 
+    private AudioSource destroyAudio;
+    private AudioSource onShoot;
     private GameObject canvas;
     private float nextShootTime;
     private RectTransform rt;
-    public GameController logic;
+    private GameController logic;
 
     void Start()
     {
-        // Set the next time to shoot
+        destroyAudio = GameObject.Find("DestroyAudio").GetComponent<AudioSource>();
+        onShoot = GameObject.Find("Shoot").GetComponent<AudioSource>();
         nextShootTime = Time.time + shootDelay;
         canvas = GameObject.Find("Canvas");
         rt = GetComponent<RectTransform>();
-        logic = GameObject.FindGameObjectWithTag("gameController").GetComponent<GameController>();
+        logic = GameObject.Find("GameController").GetComponent<GameController>();
     }
     private void FixedUpdate()
     {
-        if (rt.anchoredPosition.y > 500 || rt.anchoredPosition.y < -500)
+        if (rt.anchoredPosition.y > 500 || rt.anchoredPosition.y < -600)
         {
             Destroy(gameObject);
         }
@@ -55,10 +58,11 @@ public class EnemyController : MonoBehaviour
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation, canvas.transform);
             bullet.tag = "EnemyBullet";
             Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
+            onShoot.Play();
 
             if (bulletRb != null)
             {
-                bulletRb.linearVelocity = firePoint.up * bulletSpeed; // Set the velocity of the bullet
+                bulletRb.linearVelocity=new Vector2(0, -1) * bulletSpeed; // Set the velocity of the bullet
             }
         }
     }
@@ -69,7 +73,7 @@ public class EnemyController : MonoBehaviour
         if (collision.CompareTag("PlayerBullet"))
         {
             logic.addScore(1);
-            destroy.Play();
+            destroy.Play();destroyAudio.Play();
             Destroy(gameObject);    
         }
     }

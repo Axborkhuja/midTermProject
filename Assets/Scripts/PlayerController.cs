@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    public AudioSource destroyAudio;
+    public AudioSource onShoot;
+    public AudioSource engine;
     public ParticleSystem particle1;
     public ParticleSystem particle2;
     public ParticleSystem destroy;
@@ -28,6 +31,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        engine.Play();
         // Get input from the player
         float moveX = Input.GetAxis("Horizontal");
         float moveY = Input.GetAxis("Vertical");
@@ -49,8 +53,9 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = new Vector2(moveX, moveY) * moveSpeed;
 
         // Shoot when spacebar is pressed
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonUp(0))
         {
+            Invoke("buttonClick", 1);
             Shoot();
         }
     }
@@ -61,10 +66,11 @@ public class PlayerController : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation,canvas.transform);
         bullet.tag = "PlayerBullet";
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
-
+        onShoot.Play();
+        
         if (bulletRb != null)
         {
-            bulletRb.linearVelocity = firePoint.up * bulletSpeed; // Move the bullet in the direction of firePoint
+            bulletRb.linearVelocity=new Vector2(0,10) * bulletSpeed; // Move the bullet in the direction of firePoint
         }
     }
 
@@ -85,8 +91,9 @@ public class PlayerController : MonoBehaviour
         // Destroy the player when hit by something
         if (collision.CompareTag("Enemy"))
         {
-            destroy.Play();
             Destroy(gameObject);
+            destroy.Play(); destroyAudio.Play();
+            Invoke("destroy", 1);
             Time.timeScale = 0;
             SceneManager.LoadSceneAsync(0);
         }
