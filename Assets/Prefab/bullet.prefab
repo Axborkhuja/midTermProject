@@ -4916,7 +4916,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 212906047116171370, guid: 3952c3fe53f74a0409f716652bd8d27d, type: 3}
       propertyPath: m_SortingOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 212906047116171370, guid: 3952c3fe53f74a0409f716652bd8d27d, type: 3}
       propertyPath: m_SortingLayerID
@@ -4980,7 +4980,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c329faf22a12b4a4595a392e7bafd692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 3812801829223705762, guid: 59d196b5d3708e545be32180d0a00df9, type: 3}
   speed: 50
   destroyParticle: {fileID: 2865380096894182241, guid: 837551731ef91ac47898a3b2da2ef674, type: 3}
 --- !u!224 &4717872334575942529 stripped
