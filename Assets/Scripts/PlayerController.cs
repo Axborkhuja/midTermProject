@@ -34,8 +34,8 @@ public class PlayerController : MonoBehaviour
 
         if (rb.linearVelocity.x != 0 || rb.linearVelocity.y != 0)
         {
-            main1.gravityModifier=0.3f;
-            main2.gravityModifier=0.3f;
+            main1.gravityModifier = 0.3f;
+            main2.gravityModifier = 0.3f;
         }
         else
         {
@@ -57,37 +57,57 @@ public class PlayerController : MonoBehaviour
     void Shoot()
     {
         // Instantiate the bullet at the fire point
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation,canvas.transform);
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation, canvas.transform);
         bullet.tag = "PlayerBullet";
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
         onShoot.Play();
-        
+
         if (bulletRb != null)
         {
-            bulletRb.linearVelocity=new Vector2(0,10) * bulletSpeed; // Move the bullet in the direction of firePoint
+            bulletRb.linearVelocity = new Vector2(0, 10) * bulletSpeed; // Move the bullet in the direction of firePoint
         }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("EnemyBullet")){
-            if (health-150 > 0){
-                health = health - 150;
+        if (collision.CompareTag("EnemyBullet"))
+        {
+            if (health - 150 > 0)
+            {
+                health -= 150;
                 logic.updateHealth(150);
-            }else{
-                destroy.Play();
-                Destroy(gameObject);
-                Time.timeScale = 0;
+            }
+            else
+            {
+                Die();
             }
         }
 
-        // Destroy the player when hit by something
-        if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy") || collision.CompareTag("Obstacle"))
         {
-            Destroy(gameObject);
-            destroy.Play(); destroyAudio.Play();
-            Invoke("destroy", 1);
-            Time.timeScale = 0;
+            Die();
         }
+    }
+
+    void Die()
+    {
+        // Stop the player from moving and interacting
+        rb.linearVelocity = Vector2.zero;
+        rb.bodyType = RigidbodyType2D.Kinematic;  // Makes the player non-interactive with physics
+
+        // Play the particle effect for destruction
+        destroy.Play(); // Play the destruction particle effect
+
+        // Play audio for destruction
+        destroyAudio.Play();
+
+        // Disable player visuals (e.g., sprite renderer) if you want to make them invisible during the particle effect
+        GetComponent<SpriteRenderer>().enabled = false;
+
+        // Delay destruction of the player object to allow the particle effect to play fully
+        Destroy(gameObject, destroy.main.duration); // This destroys the gameObject after the particle effect duration
+
+        // Optionally, freeze the game or slow down time
+        Time.timeScale = 0.5f; // Slow motion effect
     }
 }
