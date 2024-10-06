@@ -43,8 +43,9 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = new Vector2(moveX, moveY) * moveSpeed;
 
         // Shoot when spacebar is pressed
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonUp(0))
         {
+            Invoke("buttonClick", 1);
             Shoot();
         }
     }
@@ -58,7 +59,7 @@ public class PlayerController : MonoBehaviour
 
         if (bulletRb != null)
         {
-            bulletRb.linearVelocity = firePoint.up * bulletSpeed; // Move the bullet in the direction of firePoint
+            bulletRb.AddForce( new Vector2(0,1) * bulletSpeed); // Move the bullet in the direction of firePoint
         }
     }
 
@@ -78,8 +79,9 @@ public class PlayerController : MonoBehaviour
         // Destroy the player when hit by something
         if (collision.CompareTag("Enemy"))
         {
-            destroy.Play();
             Destroy(gameObject);
+            destroy.Play();
+            Invoke("destroy", 1);
             Time.timeScale = 0;
         }
     }
