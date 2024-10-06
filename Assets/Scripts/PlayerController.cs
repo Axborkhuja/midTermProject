@@ -2,82 +2,71 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public ParticleSystem particleSystem1;
-    public ParticleSystem destroyObject;
-    public ParticleSystem particleSystem2;
-    public GameObject bulletPrefab; // Prefab of the bullet (UI element)
-    public Transform[] firePoints; // Array of positions where the bullets spawn
-    public float shoootingDelay=5f;
+    public ParticleSystem particle1;
+    public ParticleSystem particle2;
+    public ParticleSystem destroy;
+    public GameObject bulletPrefab; // Bullet prefab to shoot
+    public Transform firePoint; // Fire point for shooting
+    public Canvas canvas;
     public float bulletSpeed = 10f; // Speed of the bullet
-    public GameObject bulletManager; // Reference to the Canvas
-    private float speed = 10f;
+    public float moveSpeed = 5f; // Movement speed of the player
     private Rigidbody2D rb;
-    private float previousVerticalInput;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        previousVerticalInput = 0f; // Initial value
     }
 
     void FixedUpdate()
     {
-        float currentVerticalInput = Input.GetAxis("Vertical");
+        // Get input from the player
+        float moveX = Input.GetAxis("Horizontal");
+        float moveY = Input.GetAxis("Vertical");
+        var main1 = particle1.main;
+        var main2 = particle2.main;
 
-        // Change particle system gravity modifier based on input condition
-        if (currentVerticalInput > previousVerticalInput)
+        if (rb.linearVelocity.x != 0 || rb.linearVelocity.y != 0)
         {
-            var main1 = particleSystem1.main;
-            var main2 = particleSystem2.main;
-
-            // Set gravity modifier to -0.5
+            main1.gravityModifier=0.3f;
+            main2.gravityModifier=0.3f;
+        }
+        else
+        {
             main1.gravityModifier = -0.5f;
             main2.gravityModifier = -0.5f;
         }
-        else if (currentVerticalInput < previousVerticalInput)
-        {
-            // Disable the emission and adjust gravity modifier
-            var main1 = particleSystem1.main;
-            var main2 = particleSystem2.main;
 
-            // Set gravity modifier to 0.3
-            main1.gravityModifier = 0.3f;
-            main2.gravityModifier = 0.3f;
-        }
+        // Set linear velocity based on input
+        rb.linearVelocity = new Vector2(moveX, moveY) * moveSpeed;
 
-        // Update the velocity
-        rb.linearVelocity = new Vector2(Input.GetAxis("Horizontal"), currentVerticalInput) * speed;
-
-        // Update the previous vertical input value for the next frame
-        previousVerticalInput = currentVerticalInput;
-    }
-
-    void Update()
-    {
-        // Check if the spacebar is pressed for shooting
+        // Shoot when spacebar is pressed
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Invoke("Shooting delay", shoootingDelay);
             Shoot();
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.CompareTag("Enemy") || collision.CompareTag("Bullet"))
-        {
-            Destroy(gameObject);
-            destroyObject.Play();
-            Invoke("Player destroyed", 2);
-            Time.timeScale = 0;
-        }
-    }
+
     void Shoot()
     {
-        // Loop through each fire point and shoot a bullet
-        foreach (Transform firePoint in firePoints)
-        {
+        // Instantiate the bullet at the fire point
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation,canvas.transform);
+        bullet.tag = "PlayerBullet";
+        Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
 
-            // You can add bullet velocity logic here if needed (depends on UI-based behavior)
+        if (bulletRb != null)
+        {
+            bulletRb.linearVelocity = firePoint.up * bulletSpeed; // Move the bullet in the direction of firePoint
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Destroy the player when hit by something
+        if (collision.CompareTag("EnemyBullet") || collision.CompareTag("Enemy"))
+        {
+            destroy.Play();
+            Destroy(gameObject);
+            Time.timeScale = 0;
         }
     }
 }

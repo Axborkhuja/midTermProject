@@ -2,68 +2,72 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public ParticleSystem destroyObject;
-    public Transform[] firePoints; // Array of fire points where bullets will spawn
-    public Transform player; // Reference to the player's transform
+    public ParticleSystem destroy;
+    public GameObject bulletPrefab; // Bullet prefab for shooting
+    public Transform[] firePoints; // Multiple fire points
     public float speed = 2f; // Speed of the enemy's movement
-    public float deviationAmount = 0.5f; // Deviation in movement
+    public float xRange = 2f; // X-axis movement range
     public float shootDelay = 1.5f; // Delay between shots
-    private Vector2 deviation; // Random deviation for movement
-    private float nextShootTime; // Time for the next shoot action
-    private float score;
+    public float bulletSpeed = 5f; // Speed of the bullet
+
+    private GameObject canvas;
+    private float nextShootTime;
+    private RectTransform rt;
 
     void Start()
     {
-        // Calculate initial deviation
-        deviation = new Vector2(Random.Range(-deviationAmount, deviationAmount), Random.Range(-deviationAmount, deviationAmount));
-        nextShootTime = Time.time + shootDelay; // Set the initial shooting time
+        // Set the next time to shoot
+        nextShootTime = Time.time + shootDelay;
+        canvas = GameObject.Find("Canvas");
+        rt = GetComponent<RectTransform>();
     }
-
-    void Update()
+    private void FixedUpdate()
     {
-        // Move towards the player with some deviation
-        MoveTowardsPlayer();
-
-        // Check if it's time to shoot
-        if (Time.time >= nextShootTime)
+        if (rt.anchoredPosition.y > 500 || rt.anchoredPosition.y < -500)
         {
-            Shoot();
-            nextShootTime = Time.time + shootDelay; // Reset shoot delay
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // Play particle effect and destroy enemy when hit by a bullet
-        if (collision.CompareTag("Bullet"))
-        {
-            score += 2;
-            destroyObject.Play();
             Destroy(gameObject);
         }
     }
-
-    void MoveTowardsPlayer()
+    void Update()
     {
-        if (player != null)
+        // Move enemy down in Y-axis
+        transform.Translate(Vector2.up * speed * Time.deltaTime);
+
+        // Move enemy smoothly in X-axis between two constants
+        float newX = Mathf.PingPong(Time.time * speed, xRange * 2) - xRange;
+        transform.position = new Vector2(newX, transform.position.y);
+
+        // Shoot at intervals
+        if (Time.time >= nextShootTime)
         {
-            // Calculate direction towards player with deviation
-            Vector2 direction = ((Vector2)player.position + deviation - (Vector2)transform.position).normalized;
-
-            // Move enemy in the calculated direction
-            transform.Translate(direction * speed * Time.deltaTime);
-
-            // Recalculate deviation occasionally for erratic movement
-            deviation = new Vector2(0, Random.Range(-deviationAmount, deviationAmount));
+            Shoot();
+            nextShootTime = Time.time + shootDelay;
         }
     }
 
     void Shoot()
     {
-        Bullet bullet = new Bullet();
         foreach (Transform firePoint in firePoints)
         {
-            bullet.Shoot(firePoint);
+            // Instantiate bullet at each fire point
+            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation, canvas.transform);
+            bullet.tag = "EnemyBullet";
+            Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
+
+            if (bulletRb != null)
+            {
+                bulletRb.linearVelocity = firePoint.up * bulletSpeed; // Set the velocity of the bullet
+            }
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Destroy the enemy on collision with player's bullet
+        if (collision.CompareTag("PlayerBullet"))
+        {
+            destroy.Play();
+            Destroy(gameObject);
         }
     }
 }

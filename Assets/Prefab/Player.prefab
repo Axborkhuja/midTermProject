@@ -4987,7 +4987,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 7.69}
+  m_AnchoredPosition: {x: 0, y: 11.63}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6640924976411185261
@@ -5019,7 +5019,7 @@ RectTransform:
   m_GameObject: {fileID: 6640924976411185261}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalScale: {x: 7, y: 7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4769502162140789549}
@@ -5502,8 +5502,8 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 1
-  m_SleepingMode: 1
+  m_Interpolate: 2
+  m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &5310030115974236078
@@ -5518,15 +5518,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02ebe3b590681724ba4c4358255593c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleSystem1: {fileID: 3009591165640664440}
-  destroyObject: {fileID: 2865380096894182241, guid: 837551731ef91ac47898a3b2da2ef674, type: 3}
-  particleSystem2: {fileID: 1875690890650827859}
+  particle1: {fileID: 3009591165640664440}
+  particle2: {fileID: 1875690890650827859}
+  destroy: {fileID: 2865380096894182241, guid: 837551731ef91ac47898a3b2da2ef674, type: 3}
   bulletPrefab: {fileID: 4714404243307574825, guid: 1541a3b2baf61f24ba2607c7f467e8f9, type: 3}
-  firePoints:
-  - {fileID: 598380191458484028}
-  shoootingDelay: 5
-  bulletSpeed: 10
-  bulletManager: {fileID: 9026497237755561975, guid: 51c1024afc71fd44cb829715b5027971, type: 3}
+  firePoint: {fileID: 598380191458484028}
+  canvas: {fileID: 0}
+  bulletSpeed: 50
+  moveSpeed: 5
 --- !u!1 &8845917888002570486
 GameObject:
   m_ObjectHideFlags: 0

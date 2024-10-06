@@ -26,13 +26,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8363776174550309861}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: -1.47, z: 0}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: -1.34, z: 0}
   m_LocalScale: {x: 1.499975, y: 0.76946527, z: 1.1538271}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4717872334575942529}
-  m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 90, z: 180}
 --- !u!198 &4446997581445308829
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -42,7 +42,7 @@ ParticleSystem:
   m_GameObject: {fileID: 8363776174550309861}
   serializedVersion: 8
   lengthInSec: 0.05
-  simulationSpeed: 10
+  simulationSpeed: 20
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -116,7 +116,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -169,7 +169,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -3
+      scalar: -5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -611,7 +611,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -4852,11 +4852,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4939776514575168, guid: 3952c3fe53f74a0409f716652bd8d27d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4939776514575168, guid: 3952c3fe53f74a0409f716652bd8d27d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4939776514575168, guid: 3952c3fe53f74a0409f716652bd8d27d, type: 3}
       propertyPath: m_LocalScale.z
@@ -4876,7 +4876,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4939776514575168, guid: 3952c3fe53f74a0409f716652bd8d27d, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4939776514575168, guid: 3952c3fe53f74a0409f716652bd8d27d, type: 3}
       propertyPath: m_LocalRotation.x
@@ -4888,7 +4888,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4939776514575168, guid: 3952c3fe53f74a0409f716652bd8d27d, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939776514575168, guid: 3952c3fe53f74a0409f716652bd8d27d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 138
       objectReference: {fileID: 0}
     - target: {fileID: 4939776514575168, guid: 3952c3fe53f74a0409f716652bd8d27d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4900,7 +4904,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4939776514575168, guid: 3952c3fe53f74a0409f716652bd8d27d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 60203687728882170, guid: 3952c3fe53f74a0409f716652bd8d27d, type: 3}
       propertyPath: m_IsTrigger
@@ -4964,7 +4968,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 5
@@ -4981,7 +4985,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
-  destroyParticle: {fileID: 2865380096894182241, guid: 837551731ef91ac47898a3b2da2ef674, type: 3}
 --- !u!224 &4717872334575942529 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4939776514575168, guid: 3952c3fe53f74a0409f716652bd8d27d, type: 3}
