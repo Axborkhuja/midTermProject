@@ -1,4 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,10 +17,13 @@ public class PlayerController : MonoBehaviour
     public int health = 100;
     public GameController logic;
 
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         logic = GameObject.FindGameObjectWithTag("gameController").GetComponent<GameController>();
+
+
     }
 
     void FixedUpdate()
@@ -65,13 +71,14 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("EnemyBullet")){
-            if (health-150 > 0){
-                health = health - 150;
-                logic.updateHealth(150);
+            if (health-15 > 0){
+                health = health - 15;
+                logic.updateHealth(15);
             }else{
                 destroy.Play();
                 Destroy(gameObject);
                 Time.timeScale = 0;
+                SceneManager.LoadSceneAsync(0);
             }
         }
 
@@ -81,6 +88,7 @@ public class PlayerController : MonoBehaviour
             destroy.Play();
             Destroy(gameObject);
             Time.timeScale = 0;
+            SceneManager.LoadSceneAsync(0);
         }
     }
 }

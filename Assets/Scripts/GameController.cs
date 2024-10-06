@@ -9,11 +9,23 @@ public class GameController : MonoBehaviour
     public Text scoreText;
     public Text healthText;
 
+    public Transform playerSpawnPoint;
+    public GameObject playerPrefab;
+
     [ContextMenu("Increase Score")]
     public void addScore(int scoreToAdd){
         playerScore = playerScore + scoreToAdd;
         scoreText.text = playerScore.ToString();
     }
+
+    void Start (){
+        if (GameObject.FindWithTag("Player") == null)
+        {
+            // Respawn the player
+            Instantiate(playerPrefab, playerSpawnPoint.position, Quaternion.identity);
+        }
+    }
+    
 
     public void updateHealth(int amount){
         health = health - amount;

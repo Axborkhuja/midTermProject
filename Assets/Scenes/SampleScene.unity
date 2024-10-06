@@ -219,6 +219,7 @@ RectTransform:
   - {fileID: 818419640}
   - {fileID: 1779778710}
   - {fileID: 617683826}
+  - {fileID: 671673067}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -677,6 +678,41 @@ RectTransform:
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -152.34, y: 170.34}
   m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &671673066
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 671673067}
+  m_Layer: 5
+  m_Name: playerSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &671673067
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671673066}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 255445187}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -131}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &818419639
 GameObject:
@@ -1211,6 +1247,8 @@ MonoBehaviour:
   health: 100
   scoreText: {fileID: 1779778708}
   healthText: {fileID: 617683824}
+  playerSpawnPoint: {fileID: 671673067}
+  playerPrefab: {fileID: 6640924976411185261, guid: 5f5b530963572454b909f7a26b8c215a, type: 3}
 --- !u!4 &1425685046
 Transform:
   m_ObjectHideFlags: 0
@@ -1884,9 +1922,17 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5310030115974236078, guid: 5f5b530963572454b909f7a26b8c215a, type: 3}
+      propertyPath: playerPrefab
+      value: 
+      objectReference: {fileID: 6640924976411185261, guid: 5f5b530963572454b909f7a26b8c215a, type: 3}
+    - target: {fileID: 5310030115974236078, guid: 5f5b530963572454b909f7a26b8c215a, type: 3}
       propertyPath: bulletManager
       value: 
       objectReference: {fileID: 315440748}
+    - target: {fileID: 5310030115974236078, guid: 5f5b530963572454b909f7a26b8c215a, type: 3}
+      propertyPath: playerSpawnPoint
+      value: 
+      objectReference: {fileID: 671673067}
     - target: {fileID: 5310030115974236078, guid: 5f5b530963572454b909f7a26b8c215a, type: 3}
       propertyPath: firePoints.Array.size
       value: 1
