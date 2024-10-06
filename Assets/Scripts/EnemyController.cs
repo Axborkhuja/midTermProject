@@ -23,7 +23,7 @@ public class EnemyController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (rt.anchoredPosition.y > 500 || rt.anchoredPosition.y < -500)
+        if (rt.anchoredPosition.y > 500 || rt.anchoredPosition.y < -600)
         {
             Destroy(gameObject);
         }
@@ -56,7 +56,7 @@ public class EnemyController : MonoBehaviour
 
             if (bulletRb != null)
             {
-                bulletRb.linearVelocity = firePoint.up * bulletSpeed; // Set the velocity of the bullet
+                bulletRb.AddForce(new Vector2(0, -1) * bulletSpeed); // Set the velocity of the bullet
             }
         }
     }
@@ -67,6 +67,7 @@ public class EnemyController : MonoBehaviour
         if (collision.CompareTag("PlayerBullet"))
         {
             destroy.Play();
+            Invoke("destroy", 1);
             Destroy(gameObject);
         }
     }
