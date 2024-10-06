@@ -70,7 +70,7 @@ public class EnemyController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         // Destroy the enemy on collision with player's bullet
-        if (collision.CompareTag("PlayerBullet"))
+        if (collision.CompareTag("PlayerBullet")|| collision.CompareTag("Obstacle") ||collision.CompareTag("Player"))
         {
             logic.addScore(1);
             destroy.Play();destroyAudio.Play();
