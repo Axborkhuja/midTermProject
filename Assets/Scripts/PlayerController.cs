@@ -76,17 +76,6 @@ public class PlayerController : MonoBehaviour
         // Loop through each fire point and shoot a bullet
         foreach (Transform firePoint in firePoints)
         {
-            // Instantiate the bulletPrefab as a child of the canvas
-            GameObject bullet = Instantiate(bulletPrefab, bulletManager.transform);
-
-            // Get the RectTransform component of the bulletPrefab
-            RectTransform bulletRect = bullet.GetComponent<RectTransform>();
-
-            // Set the position relative to the canvas (firePoint position in this case)
-            if (bulletRect != null)
-            {
-                bulletRect.position = firePoint.position; // Set its position to the firePoint
-            }
 
             // You can add bullet velocity logic here if needed (depends on UI-based behavior)
         }

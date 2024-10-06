@@ -393,7 +393,7 @@ MonoBehaviour:
   deviationAmount: 1
   shootDelay: 2
   bulletSpeed: 20
-  bulletManager: {fileID: 2829322801272478315, guid: 09dc46e7ea648804b898dc3d4740c22c, type: 3}
+  bulletManager: {fileID: 9026497237755561975, guid: 51c1024afc71fd44cb829715b5027971, type: 3}
 --- !u!1 &1121213960320619550
 GameObject:
   m_ObjectHideFlags: 0

@@ -4987,7 +4987,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 5.05}
+  m_AnchoredPosition: {x: 0, y: 7.69}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6640924976411185261
@@ -5526,7 +5526,7 @@ MonoBehaviour:
   - {fileID: 598380191458484028}
   shoootingDelay: 5
   bulletSpeed: 10
-  bulletManager: {fileID: 7624344652267636138, guid: 09dc46e7ea648804b898dc3d4740c22c, type: 3}
+  bulletManager: {fileID: 9026497237755561975, guid: 51c1024afc71fd44cb829715b5027971, type: 3}
 --- !u!1 &8845917888002570486
 GameObject:
   m_ObjectHideFlags: 0
