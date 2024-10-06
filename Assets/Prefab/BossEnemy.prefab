@@ -4880,8 +4880,8 @@ GameObject:
   - component: {fileID: 3150662848941259435}
   - component: {fileID: 7091825842168237671}
   - component: {fileID: 3533158663966003670}
-  - component: {fileID: -199030731824953286}
   - component: {fileID: -2614362599484923964}
+  - component: {fileID: -199030731824953286}
   m_Layer: 0
   m_Name: BossEnemy
   m_TagString: Enemy
@@ -5328,28 +5328,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-199030731824953286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6493258636236179076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e1fc3d9a5f2a4149915d91154777d36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destroy: {fileID: 2865380096894182241, guid: 837551731ef91ac47898a3b2da2ef674, type: 3}
-  bulletPrefab: {fileID: 4714404243307574825, guid: 1541a3b2baf61f24ba2607c7f467e8f9, type: 3}
-  firePoints:
-  - {fileID: 6964888573397002701}
-  - {fileID: 7292514107137582235}
-  - {fileID: 3798532700205067004}
-  speed: 1
-  xRange: 2
-  shootDelay: 4
-  bulletSpeed: 100
 --- !u!50 &-2614362599484923964
 Rigidbody2D:
   serializedVersion: 5
@@ -5377,6 +5355,28 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &-199030731824953286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6493258636236179076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e1fc3d9a5f2a4149915d91154777d36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroy: {fileID: 2865380096894182241, guid: 837551731ef91ac47898a3b2da2ef674, type: 3}
+  bulletPrefab: {fileID: 4714404243307574825, guid: 1541a3b2baf61f24ba2607c7f467e8f9, type: 3}
+  firePoints:
+  - {fileID: 6964888573397002701}
+  - {fileID: 7292514107137582235}
+  - {fileID: 3798532700205067004}
+  speed: 1
+  xRange: 2
+  shootDelay: 4.5
+  bulletSpeed: 5
 --- !u!1 &7880273369982774433
 GameObject:
   m_ObjectHideFlags: 0

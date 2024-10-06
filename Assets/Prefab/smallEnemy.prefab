@@ -74,11 +74,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2306021130918918043, guid: cdf17be89501f4640a7bf79c310066b3, type: 3}
       propertyPath: shootDelay
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2306021130918918043, guid: cdf17be89501f4640a7bf79c310066b3, type: 3}
       propertyPath: bulletSpeed
-      value: 100
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2306021130918918043, guid: cdf17be89501f4640a7bf79c310066b3, type: 3}
       propertyPath: bulletPrefab

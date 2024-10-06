@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public AudioSource destroyAudio;
+    public AudioSource onShoot;
+    public AudioSource engine;
     public ParticleSystem particle1;
     public ParticleSystem particle2;
     public ParticleSystem destroy;
@@ -17,11 +20,12 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        logic = GameObject.FindGameObjectWithTag("gameController").GetComponent<GameController>();
+
     }
 
     void FixedUpdate()
     {
+        engine.Play();
         // Get input from the player
         float moveX = Input.GetAxis("Horizontal");
         float moveY = Input.GetAxis("Vertical");
@@ -56,10 +60,11 @@ public class PlayerController : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation,canvas.transform);
         bullet.tag = "PlayerBullet";
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
-
+        onShoot.Play();
+        
         if (bulletRb != null)
         {
-            bulletRb.AddForce( new Vector2(0,1) * bulletSpeed); // Move the bullet in the direction of firePoint
+            bulletRb.linearVelocity=new Vector2(0,10) * bulletSpeed; // Move the bullet in the direction of firePoint
         }
     }
 
@@ -80,7 +85,7 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             Destroy(gameObject);
-            destroy.Play();
+            destroy.Play(); destroyAudio.Play();
             Invoke("destroy", 1);
             Time.timeScale = 0;
         }
